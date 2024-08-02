@@ -15,7 +15,7 @@ if os.getenv('RTT_ROOT'):
 # EXEC_PATH is the compiler execute path, for example, CodeSourcery, Keil MDK, IAR
 if  CROSS_TOOL == 'gcc':
     PLATFORM    = 'gcc'
-    EXEC_PATH   = 'E:/tool/env/tools/gnu_gcc/arm_gcc/mingw/bin'
+    EXEC_PATH   = '../../arm-none-eabi/bin'
 elif CROSS_TOOL == 'keil':
     PLATFORM    = 'armcc'
     EXEC_PATH   = 'C:/Keil'
@@ -60,10 +60,10 @@ if PLATFORM == 'gcc':
     LPATH = ''
 
     if BUILD == 'debug':
-        CFLAGS += ' -O0 -gdwarf-2 -g -Wall'
+        CFLAGS += ' -Og -gdwarf-2 -g -Wall'
         AFLAGS += ' -gdwarf-2'
     else:
-        CFLAGS += ' -O2'
+        CFLAGS += ' -Os'
 
     POST_ACTION = OBJCPY + ' -O binary $TARGET rtthread.bin\n' + SIZE + ' $TARGET \n'
     POST_ACTION += 'python ./makeimg.py'
